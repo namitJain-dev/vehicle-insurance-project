@@ -5,8 +5,6 @@ The **Vehicle Insurance Management System (VIMS)** is a modular web application 
 
 It follows the **MVC (Model-View-Controller)** architecture and supports both:
 - Java (Spring MVC)
-- .NET (ASP.NET Core MVC)
-
 ---
 
 ## 🎯 Features
@@ -122,30 +120,19 @@ git clone <repo-url>
 
 Configure DB in:
 - application.properties (Java)
-- appsettings.json (.NET)
 
 Run:
 ```
 # Java
 mvn spring-boot:run
-
-# .NET
-dotnet run
 ```
 
 ---
 
-## ✅ Future Enhancements
-- Payment gateway integration
-- Notifications (Email/SMS)
-- Cloud deployment
-- Mobile app support
 
 ---
 
 ## 👨‍💻 Author
-Aaryan Pathak
-
 ---
 
 ## 📄 License
