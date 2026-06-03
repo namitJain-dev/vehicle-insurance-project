@@ -3,8 +3,7 @@
 ## 📌 Overview
 The **Vehicle Insurance Management System (VIMS)** is a modular web application designed to manage vehicle insurance policies, claims, payments, and customer interactions efficiently.
 
-It follows the **MVC (Model-View-Controller)** architecture and supports both:
-- Java (Spring MVC)
+It follows the **MVC (Model-View-Controller)** architecture and it supports Java (Spring MVC)
 ---
 
 ## 🎯 Features
