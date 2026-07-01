@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Support Portal</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="navbar navbar-customer">
+    <h2>🛡️ Customer Support Portal</h2>
+</div>
+
+<div class="container container-split">
+    <div class="sidebar card">
+        <div class="card-header bg-blue">
+            Open New Ticket
+        </div>
+        <div class="card-body">
+            <div style="margin-bottom: 15px; padding: 10px; background-color: #ebf8ff; border-radius: 6px; border: 1px solid #bee3f8; color: #2b6cb0; font-size: 13px; font-weight: bold;">
+                👤 Logged in as: Customer #<span th:text="${currentCustomerId}"></span>
+            </div>
+
+            <form th:action="@{/customer/create}" method="post">
+                <label style="font-size: 13px; font-weight: bold; margin-bottom: 5px; display: block;">Issue Description:</label>
+                <textarea name="issueDescription" rows="4" required placeholder="Describe your issue in detail..."></textarea>
+
+                <button type="submit">Submit Ticket</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-content card">
+        <div class="card-header bg-gray">Your Active & Resolved Tickets</div>
+        <div class="card-body card-body-table">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th style="width: 45%;">Description (Edit directly if Open)</th>
+                    <th>Status</th>
+                    <th>Agent Notes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td th:text="${ticket.ticketId}">1</td>
+
+                    <td>
+                        <form th:if="${ticket.ticketStatus.name() == 'OPEN'}" th:action="@{/customer/update/{id}(id=${ticket.ticketId})}" method="post" class="inline-form">
+                            <input type="text" name="issueDescription" th:value="${ticket.issueDescription}" required>
+                            <button type="submit" class="btn-success">Update</button>
+                        </form>
+                        <span th:if="${ticket.ticketStatus.name() == 'RESOLVED'}" th:text="${ticket.issueDescription}"></span>
+                    </td>
+
+                    <td>
+                        <span class="badge badge-resolved" th:if="${ticket.ticketStatus.name() == 'RESOLVED'}">Resolved</span>
+                        <span class="badge badge-open" th:if="${ticket.ticketStatus.name() == 'OPEN'}">Open</span>
+                    </td>
+                    <td class="text-muted" th:text="${ticket.agentNotes != null ? ticket.agentNotes : 'Pending review...'}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agent Command Center</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="navbar navbar-agent">
+    <h2>⚡ Agent Dashboard ⚡</h2>
+</div>
+
+<div class="container" style="max-width: 1400px;">
+    <div class="card">
+        <table class="table-striped table-dark-header">
+            <thead>
+            <tr>
+                <th style="width: 8%;">Ticket ID</th>
+                <th style="width: 10%;">Customer ID</th>
+                <th style="width: 25%;">Issue Description</th>
+                <th style="width: 12%;">Created On</th>
+                <th style="width: 10%;">Status</th>
+                <th style="width: 35%;">Action / Resolution Notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ticket : ${allTickets}">
+                <td th:text="${'#' + ticket.ticketId}">#1</td>
+                <td th:text="${ticket.customerId}">1</td>
+                <td th:text="${ticket.issueDescription}">Issue text</td>
+                <td th:text="${ticket.createdDate}">2026-06-02</td>
+                <td>
+                    <span class="badge badge-resolved" th:if="${ticket.ticketStatus.name() == 'RESOLVED'}">Resolved</span>
+                    <span class="badge badge-open" th:if="${ticket.ticketStatus.name() == 'OPEN'}">Open</span>
+                </td>
+                <td>
+                    <form th:if="${ticket.ticketStatus.name() == 'OPEN'}" th:action="@{/agent/resolve/{id}(id=${ticket.ticketId})}" method="post" class="inline-form">
+                        <input type="text" name="agentNotes" placeholder="Enter resolution notes here..." required>
+                        <button type="submit" class="btn-success">Mark Resolved</button>
+                    </form>
+
+                    <div th:if="${ticket.ticketStatus.name() == 'RESOLVED'}" class="text-muted">
+                        <span class="notes-label">Notes:</span>
+                        <span th:text="${ticket.agentNotes}"></span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
