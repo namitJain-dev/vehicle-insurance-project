@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Policies</title>
+</head>
+<body>
+<h2>All Policies</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Policy Number</th>
+        <th>Age</th>
+        <th>Salary</th>
+        <th>Mobile No</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="policy : ${allPolicy}">
+        <td th:text="${policy.policyId}"></td>
+        <td th:text="${policy.policyNumber}"></td>
+        <td th:text="${policy.age}"></td>
+        <td th:text="${policy.salary}"></td>
+        <td th:text="${policy.mobileNo}"></td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${policy.policyId})}">Edit</a> |
+            <a th:href="@{/delete/{id}(id=${policy.policyId})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/register">Create New Policy</a>
+</body>
+</html>
+
+
+

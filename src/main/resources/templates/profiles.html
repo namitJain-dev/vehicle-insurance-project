@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profiles</title>
+</head>
+<body>
+
+<h2>Registered Profiles</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Mobile</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${listProfiles}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.address}"></td>
+        <td th:text="${p.mobileNumber}"></td>
+        <td>
+            <a th:href="@{'/edit/' + ${p.id}}"><button>Edit</button></a>
+            <a th:href="@{'/delete/' + ${p.id}}"><button>Delete</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<a th:href="@{/add-profile}">
+    <button>Add User</button>
+</a>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Policy</title>
+</head>
+<body>
+<h2>Register New Policy</h2>
+
+<form th:action="@{/myregister}" th:object="${policy}" method="post">
+    <label for="policyNumber">Policy Number:</label>
+    <input type="number" id="policyNumber" th:field="*{policyNumber}" /><br/>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" th:field="*{age}" /><br/>
+
+    <label for="salary">Salary:</label>
+    <input type="number" id="salary" th:field="*{salary}" /><br/>
+
+    <label for="mobileNo">Mobile No:</label>
+    <input type="number" id="mobileNo" th:field="*{mobileNo}" /><br/>
+
+    <button type="submit">Register Policy</button>
+</form>
+
+<a href="/view-policies">View All Policies</a>
+</body>
+</html>
