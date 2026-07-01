@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Policy Details</title>
+</head>
+<body>
+
+<h2>Policy Details</h2>
+
+<p><b>ID:</b> <span th:text="${policy.policyId}"></span></p>
+
+<p><b>Policy Number:</b>
+    <span th:text="${policy.policyNumber}"></span></p>
+
+<p><b>Policy Holder:</b>
+    <span th:text="${policy.policyholder != null ? policy.policyholder.username : 'N/A'}"></span></p>
+
+<p><b>Vehicle:</b>
+    <span th:text="${policy.vehicle != null ? policy.vehicle.vehicleNumber : 'N/A'}"></span></p>
+
+<p><b>Coverage:</b>
+    <span th:text="${policy.coverageAmount}"></span></p>
+
+<p><b>Status:</b>
+    <span th:text="${policy.policyStatus}"></span></p>
+
+<p><b>Created Date:</b>
+    <span th:text="${policy.createdDate}"></span></p>
+
+<br>
+<a th:href="@{/policies}">Back to List</a>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Policy Form</title>
+</head>
+<body>
+
+<h2 th:text="${policy != null and policy.policyId != null} ? 'Edit Policy' : 'Create Policy'">Create / Edit Policy</h2>
+
+<form th:action="${policy != null and policy.policyId != null} ? @{/policies/update/{id}(id=${policy.policyId})} : @{/policies}"
+      method="POST">
+
+    <label>Policy Number:</label>
+    <input type="text" name="policyNumber"
+           th:value="${policy != null ? policy.policyNumber : ''}" required />
+    <br><br>
+
+    <label>Coverage Amount:</label>
+    <input type="number" step="0.01" name="coverageAmount"
+           th:value="${policy != null ? policy.coverageAmount : ''}" required />
+    <br><br>
+
+    <label>Policy Holder:</label>
+    <select name="policyholderId" required>
+        <option value="">--Select User--</option>
+        <option th:each="user : ${users}"
+                th:value="${user.userId}"
+                th:text="${user.username}"
+                th:selected="${policy != null and policy.policyholder != null and user.userId == policy.policyholder.userId}">
+        </option>
+    </select>
+    <br><br>
+
+    <label>Vehicle:</label>
+    <select name="vehicleId" required>
+        <option value="">--Select Vehicle--</option>
+        <option th:each="v : ${vehicles}"
+                th:value="${v.vehicleId}"
+                th:text="${v.vehicleNumber}"
+                th:selected="${policy != null and policy.vehicle != null and v.vehicleId == policy.vehicle.userId}">
+        </option>
+    </select>
+    <br><br>
+
+    <label>Status:</label>
+    <select name="policyStatus">
+        <option value="ACTIVE" th:selected="${policy != null and policy.policyStatus?.toString() == 'ACTIVE'}">ACTIVE</option>
+        <option value="INACTIVE" th:selected="${policy != null and policy.policyStatus?.toString() == 'INACTIVE'}">INACTIVE</option>
+        <option value="EXPIRED" th:selected="${policy != null and policy.policyStatus?.toString() == 'EXPIRED'}">EXPIRED</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Save</button>
+
+</form>
+
+<br>
+<a th:href="@{/policies}">Back to Policy List</a>
+
+</body>
+</html>

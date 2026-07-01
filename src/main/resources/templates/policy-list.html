@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Policy List</title>
+</head>
+<body>
+
+<h2>Policy List</h2>
+
+<a th:href="@{/policies/new}">New Policy</a>
+
+<br><br>
+
+<div th:if="${#lists.isEmpty(policies)}">
+    <p>No policies available.</p>
+</div>
+
+<table border="1" th:if="${!#lists.isEmpty(policies)}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Number</th>
+        <th>Policy Holder</th>
+        <th>Vehicle</th>
+        <th>Coverage</th>
+        <th>Status</th>
+        <th>Created Date</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="policy : ${policies}">
+        <td th:text="${policy.policyId}"></td>
+        <td th:text="${policy.policyNumber}"></td>
+
+        <td th:text="${policy.policyholder != null ? policy.policyholder.username : 'N/A'}"></td>
+        <td th:text="${policy.vehicle != null ? policy.vehicle.vehicleNumber : 'N/A'}"></td>
+
+        <td th:text="${policy.coverageAmount}"></td>
+        <td th:text="${policy.policyStatus}"></td>
+        <td th:text="${policy.createdDate}"></td>
+
+        <td>
+            <a th:href="@{/policies/{id}(id=${policy.policyId})}">View</a> |
+            <a th:href="@{/policies/edit/{id}(id=${policy.policyId})}">Edit</a> |
+            <a th:href="@{/policies/delete/{id}(id=${policy.policyId})}"
+               onclick="return confirm('Are you sure you want to delete this policy?');">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table> </body>
+</html>
